@@ -134,37 +134,31 @@ methods: {
 <style scoped>
 
 .task-board {
-display: flex;
-width: 89.843%;
-height: 596px;
-gap: 16px;
-xxpadding: 16px;
-overflow-x: auto;
-background-color: red;
-
-xxmargin-top: calc(100% - 596px);
-margin:auto;
-margin-top: 8vh;
-flex-shrink: 1;
-
+    display: flex;
+    width: 89.843%;
+    height: 596px;
+    gap: 16px;
+    overflow-x: auto;
+    xxbackground-color: red;
+    margin:auto;
+    margin-top: 8vh;
+    flex-shrink: 1;
 }
+
 .task-column {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-xxwidth: 200px;
-width: 20%;
-xxpadding: 16px;
-background: #f4f4f4;
-border-radius: 8px;
-background-color: green;
-flex-shrink: 1;
-flex-grow: 0;
+    width: 20%;
+    background: #f4f4f4;
+    border-radius: 8px;
+    xxbackground-color: green;
+    flex-shrink: 1;
+    flex-grow: 0;
 }
 
 .task-column__title{
-    display: flex
-;
+    display: flex;
     background: gold;
     height: 32px;
     border-radius: 6px 6px 0px 0px;
@@ -182,102 +176,110 @@ flex-grow: 0;
 }
 
 .tasks {
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: center;
-min-height: 100px;
-margin-bottom: 10px;
-background-color: violet;
-min-height: 85%;
-margin-top: 10px;
-overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100px;
+    margin-bottom: 10px;
+    xxbackground-color: violet;
+    min-height: 85%;
+    margin-top: 10px;
+    overflow-y: auto;
 }
 
 .task-item {
-   
-position: relative;
-background: white;
-padding: 8px;
-margin-bottom: 5px;
-border-radius: 4px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-width: 90%;
-
-
+    position: relative;
+    background: white;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 90%;
 }
 
 .task-content {
-display: flex;
-justify-content: space-between;
-align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .menu-button {
-background: none;
-border: none;
-cursor: pointer;
-font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
 }
 
 .task-menu {
-position: absolute;
-top: 30px;
-right: 8px;
-background: #fff;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-padding: 8px;
-z-index: 10;
+    position: absolute;
+    top: 30px;
+    right: 8px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    z-index: 10;
 }
 
 .task-column__task-add-btn{
     height: 30px;
     flex-shrink:0;
+    background: url("@/assets//plus.png") no-repeat 35% ;
+    border-style: none;
+
+    font-family: "TT Interphases Pro Variable", Arial;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #3D86F4;
+
 }
 
 .modal-overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.5);
-display: flex;
-justify-content: center;
-align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal {
-background: #fff;
-padding: 20px;
-border-radius: 8px;
-width: 300px;
-text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
 }
 .modal-buttons button {
-margin: 10px;
-padding: 8px 16px;
-border: none;
-border-radius: 4px;
-cursor: pointer;
+    margin: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .notifications {
-position: fixed;
-bottom: 20px;
-right: 20px;
-display: flex;
-flex-direction: column;
-gap: 10px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .notification {
-background: #323232;
-color: white;
-padding: 10px 20px;
-border-radius: 8px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    background: #323232;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 </style>
