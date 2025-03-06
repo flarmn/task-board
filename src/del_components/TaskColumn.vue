@@ -1,13 +1,6 @@
 <template>
     <div class="task-column">
-      <h2>{{ title }}</h2>
-      <draggable v-model="localTasks" group="tasks" @end="$emit('updateTasks', localTasks)" class="tasks">
-        <p v-if="localTasks.length === 0">Нет задач</p>
-        <div v-for="task in localTasks" :key="task.id" class="task-item">
-          {{ task.text }}
-        </div>
-      </draggable>
-      <button @click="addTask">Добавить</button>
+     
     </div>
   </template>
   
@@ -42,8 +35,11 @@
   
   <style scoped>
   .task-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 200px;
-    padding: 16px;
+    xxpadding: 16px;
     background: #f4f4f4;
     border-radius: 8px;
   }

@@ -2,31 +2,33 @@
 <div class="task-board">
     <div v-for="column in columns" :data-id="column.id" 
     :key="column.id" 
-    class="task-column-wrapper"
+    class="task-column"
     >
-    <h2>{{ column.title }}</h2>
-    <draggable
-        v-model="column.tasks"
-        :group="'tasks'"
-        class="tasks"
-        @end="handleDragEnd"
-    >
-        <div v-for="task in column.tasks" :key="task.id" class="task-item">
-        <div v-if="task.isEditing" class="task-editing">
-            <input v-model="task.text" />
-            <button @click="saveTask(task)">Сохранить</button>
-        </div>
-        <div v-else class="task-content">
-            {{ task.text }}
-            <button class="menu-button" @click="toggleMenu(task)">⋯</button>
-        </div>
-        <div v-if="task.showMenu" class="task-menu">
-            <button @click="editTask(task)">Редактировать</button>
-            <button @click="confirmDelete(column.id, task)">Удалить</button>
-        </div>
-        </div>
-    </draggable>
-    <button @click="addTask(column.id)">Добавить</button>
+        <h2 class = "task-column__title" :style = "column.bColor">{{ column.title }} </h2>
+
+        <draggable
+            v-model="column.tasks"
+            :group="'tasks'"
+            class="tasks"
+            @end="handleDragEnd"
+        >
+            <div v-for="task in column.tasks" :key="task.id" class="task-item">
+            <div v-if="task.isEditing" class="task-editing">
+                <input v-model="task.text" />
+                <button @click="saveTask(task)">Сохранить</button>
+            </div>
+            <div v-else class="task-content">
+                {{ task.text }}
+                <button class="menu-button" @click="toggleMenu(task)">⋯</button>
+            </div>
+            <div v-if="task.showMenu" class="task-menu">
+                <button @click="editTask(task)">Редактировать</button>
+                <button @click="confirmDelete(column.id, task)">Удалить</button>
+            </div>
+            </div>
+        </draggable>
+
+        <button @click="addTask(column.id)" class = "task-column__task-add-btn">Добавить</button>
     </div>
 
     <div v-if="showDeleteModal" class="modal-overlay">
@@ -57,11 +59,11 @@ components: { draggable },
 data() {
     return {
     columns: [
-        { id: 1, title: 'На согласовании', tasks: [] },
-        { id: 2, title: 'Новые', tasks: [] },
-        { id: 3, title: 'В процессе', tasks: [] },
-        { id: 4, title: 'Готово', tasks: [] },
-        { id: 5, title: 'Доработать', tasks: [] }
+        { id: 1, title: 'На согласовании', tasks: [], bColor: { backgroundColor: '#FF65DD'} },
+        { id: 2, title: 'Новые', tasks: [], bColor: { backgroundColor: '#33A0FF' } },
+        { id: 3, title: 'В процессе', tasks: [], bColor: { backgroundColor: '#FFC633'} },
+        { id: 4, title: 'Готово', tasks: [], bColor: { backgroundColor: '#22C33D'} },
+        { id: 5, title: 'Доработать', tasks: [], bColor: {backgroundColor: '#F53D5C' } }
     ],
     notifications: [],
     showDeleteModal: false,
@@ -109,7 +111,7 @@ methods: {
     handleDragEnd(evt) {
         const movedTask = evt.item.innerText;
         console.log('movedTask', movedTask);
-        const toColumnElement = evt.to.closest('.task-column-wrapper');
+        const toColumnElement = evt.to.closest('.task-column');
         console.log('toColumnElement', toColumnElement);
         const toColumnId = parseInt(toColumnElement.getAttribute('data-id'));
         console.log('toColumnId', toColumnId);
@@ -130,41 +132,94 @@ methods: {
 </script>
 
 <style scoped>
+
 .task-board {
 display: flex;
+width: 89.843%;
+height: 596px;
 gap: 16px;
-padding: 16px;
+xxpadding: 16px;
 overflow-x: auto;
+background-color: red;
+
+xxmargin-top: calc(100% - 596px);
+margin:auto;
+margin-top: 8vh;
+flex-shrink: 1;
+
 }
-.task-column-wrapper {
-width: 200px;
-padding: 16px;
+.task-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+xxwidth: 200px;
+width: 20%;
+xxpadding: 16px;
 background: #f4f4f4;
 border-radius: 8px;
+background-color: green;
+flex-shrink: 1;
+flex-grow: 0;
 }
+
+.task-column__title{
+    display: flex
+;
+    background: gold;
+    height: 32px;
+    border-radius: 6px 6px 0px 0px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: "TT Interphases Pro Variable", Arial;
+    font-weight: 584;
+    font-size: 14px;
+    line-height: 17.5px;
+    letter-spacing: 0%;
+    padding: 0;
+    margin: 0;
+    flex-shrink:0;
+}
+
 .tasks {
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
 min-height: 100px;
 margin-bottom: 10px;
+background-color: violet;
+min-height: 85%;
+margin-top: 10px;
+overflow-y: auto;
 }
+
 .task-item {
+   
 position: relative;
 background: white;
 padding: 8px;
 margin-bottom: 5px;
 border-radius: 4px;
 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+width: 90%;
+
+
 }
+
 .task-content {
 display: flex;
 justify-content: space-between;
 align-items: center;
 }
+
 .menu-button {
 background: none;
 border: none;
 cursor: pointer;
 font-size: 18px;
 }
+
 .task-menu {
 position: absolute;
 top: 30px;
@@ -176,6 +231,12 @@ box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 padding: 8px;
 z-index: 10;
 }
+
+.task-column__task-add-btn{
+    height: 30px;
+    flex-shrink:0;
+}
+
 .modal-overlay {
 position: fixed;
 top: 0;
@@ -187,6 +248,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 }
+
 .modal {
 background: #fff;
 padding: 20px;
@@ -201,6 +263,7 @@ border: none;
 border-radius: 4px;
 cursor: pointer;
 }
+
 .notifications {
 position: fixed;
 bottom: 20px;
@@ -209,6 +272,7 @@ display: flex;
 flex-direction: column;
 gap: 10px;
 }
+
 .notification {
 background: #323232;
 color: white;
