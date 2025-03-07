@@ -44,8 +44,13 @@
 
     <div class="notifications">
     <div v-for="(notification, index) in notifications" :key="index" class="notification">
-        <strong>{{ notification.title }}</strong>
-        <p>{{ notification.text }}</p>
+        <div class = "notification__sign"></div>
+        <div class = "notification__info">
+            <strong class = "notification__info-title">{{ notification.title }}</strong>
+            <p class = "notification__info-text">{{ notification.text }}</p>
+        </div>
+        <button class = "notification__close-btn"></button>
+        
     </div>
     </div>
 </div>
@@ -151,6 +156,7 @@ methods: {
     justify-content: space-between;
     width: 20%;
     background: #f4f4f4;
+    border: 1px solid #E3E5E8;
     border-radius: 8px;
     xxbackground-color: green;
     flex-shrink: 1;
@@ -159,10 +165,12 @@ methods: {
 
 .task-column__title{
     display: flex;
-    background: gold;
+    xxbackground: gold;
     height: 32px;
+    xxborder: 1px solid #E3E5E8;
+    xxborder-bottom: none;
     border-radius: 6px 6px 0px 0px;
-    width: 100%;
+    width: 99%;
     align-items: center;
     justify-content: center;
     font-family: "TT Interphases Pro Variable", Arial;
@@ -170,11 +178,15 @@ methods: {
     font-size: 14px;
     line-height: 17.5px;
     letter-spacing: 0%;
-    padding: 0;
+    padding: 1.5px;
     margin: 0;
+    xxmargin-left: -1px;
     flex-shrink:0;
+
 }
 
+
+/* Общие стили для контейнера с прокруткой */
 .tasks {
     display: flex;
     flex-direction: column;
@@ -184,8 +196,29 @@ methods: {
     margin-bottom: 10px;
     xxbackground-color: violet;
     min-height: 85%;
-    margin-top: 10px;
-    overflow-y: auto;
+  xxmax-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #c4c4c4 transparent; /* Firefox */
+  border-radius: 8px; /* для контейнера */
+  overflow-anchor: none;
+}
+
+/* Chrome, Safari и Edge */
+.tasks::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tasks::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.tasks::-webkit-scrollbar-thumb {
+  background-color: #c4c4c4;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
 .task-item {
@@ -196,6 +229,7 @@ methods: {
     border-radius: 4px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     width: 90%;
+    border: 1px solid #C4CAD4;
 }
 
 .task-content {
@@ -208,7 +242,11 @@ methods: {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 24px;
+    color:  #86949E;
+    xxborder: 2px solid #86949E;
+    font-weight: 1000;
+    text-shadow: 1px 1px 4px #86949E;
 }
 
 .task-menu {
@@ -268,18 +306,78 @@ methods: {
 
 .notifications {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30%;
+    right: 4%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
 }
 
 .notification {
-    background: #323232;
+    display: flex;
+    background: #FFFFFF;
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    padding-left: 0;
+    border: 1px solid #E3E5E8;
+    border-left: 8px solid #22C33D;
+    border-radius: 4px;
+    xxbox-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    height: 76px;
+    width: 400px;
+    color: #1C2530;
+
+    font-family: "TT Interphases Pro Variable", Arial;
+    font-weight: 584;
+    font-size: 14px;
+    line-height: 125%;
+    letter-spacing: 1%;
+    vertical-align: middle;
+
+    box-shadow: 0px 8px 16px 0px #0000000F;
+    box-shadow: 0px 8px 8px 0px #00000014;
 }
+
+.notification__sign{
+    height: 100%;
+    width: 56px;
+    xxbackground-color: yellow;
+    background: url("@/assets/notification_icon.png") no-repeat center top;
+    background-size: 24px;
+}
+ 
+.notification__info{
+    width: 370px;
+    height: 100%;
+    xxbackground-color: red;
+}
+
+.notification__info-title{
+    font-weight: 584;
+    font-size: 14px;
+    line-height: 125%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+ 
+}
+
+.notification__info-text{
+font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+letter-spacing: 0%;
+vertical-align: middle;
+max-height: 54px;
+overflow-y: hidden;
+margin-top: 8px;
+}
+
+.notification__close-btn{
+    width: 18px;
+    height: 18px;
+    background: url("@/assets/close_icon.png") no-repeat center;
+    border-style: none;
+    cursor: pointer;
+}
+
 </style>
