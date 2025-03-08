@@ -239,6 +239,13 @@ methods: {
     border: 1px solid #C4CAD4;
 }
 
+.task-item:hover{
+    border: 1px solid rgba(227, 229, 232, 1);
+
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.08);
+}
+
 .task-content {
     display: flex;
     justify-content: space-between;
@@ -290,7 +297,7 @@ methods: {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
