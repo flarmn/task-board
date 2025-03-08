@@ -32,24 +32,27 @@
     </div>
 
     <div v-if="showDeleteModal" class="modal-overlay">
-    <div class="modal">
-        <p>Вы уверены, что хотите удалить задачу?</p>
-        <p><strong>{{ taskToDelete.text }}</strong></p>
-        <div class="modal-buttons">
-        <button @click="deleteTaskConfirmed">Удалить</button>
-        <button @click="cancelDelete">Отменить</button>
+        <div class="modal">
+            <div class = "modal__title">
+                <h2 class = "modal__title-text">Удалить задачу?</h2>
+                <button class = "close-btn" @click="cancelDelete"></button>
+            </div>
+            <p class = "modal__task-text">{{ taskToDelete.text }}</p>
+            <div class="modal-buttons">
+                <button @click="deleteTaskConfirmed">Удалить</button>
+                <button @click="cancelDelete">Отменить</button>
+            </div>
         </div>
-    </div>
     </div>
 
     <div class="notifications">
-    <div v-for="(notification, index) in notifications" :key="index" class="notification">
+    <div v-for="(notification) in notifications" :key="notification.id" class="notification">
         <div class = "notification__sign"></div>
         <div class = "notification__info">
             <strong class = "notification__info-title">{{ notification.title }}</strong>
             <p class = "notification__info-text">{{ notification.text }}</p>
         </div>
-        <button class = "notification__close-btn"></button>
+        <button class = "close-btn" @click="removeNotification(notification.id)"></button>
         
     </div>
     </div>
@@ -127,11 +130,15 @@ methods: {
         }
     },
     showNotification(title, text) {
-    this.notifications.push({ title, text });
+    const id = Date.now();
+    this.notifications.push({ id, title, text });
     setTimeout(() => {
-        this.notifications.shift();
+        this.removeNotification(id);
     }, 3000);
-    }
+    },
+    removeNotification(id) {
+    this.notifications = this.notifications.filter(n => n.id !== id);
+    },
 }
 };
 </script>
@@ -289,21 +296,77 @@ methods: {
     align-items: center;
 }
 
+/* MODAL SECTION */
 .modal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 500px;
+    max-height: 196px;
     background: #fff;
-    padding: 20px;
+    padding: 40px;
     border-radius: 8px;
-    width: 300px;
-    text-align: center;
 }
-.modal-buttons button {
-    margin: 10px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
+
+.modal__title{
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal__title-text{
+    font-family: "TT Interphases Pro Variable", Arial;
+    font-weight: 584;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    padding:0;
+    margin:0;
+    color: #1C2530;
+}
+
+.modal__task-text{
+    font-family: "TT Interphases Pro Variable", Arial;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0%;
+    color: #1C2530;
+    max-height: 54px;
+    overflow-y: hidden;
+}
+
+.modal__title .close-btn{
+    width: 24px;
+    height: 24px;
+    background-size: 12px;
     cursor: pointer;
 }
 
+.modal-buttons{
+    display: flex;
+    column-gap: 20px;
+}
+
+.modal-buttons button {
+    margin: 0px;
+    border-radius: 4px;
+    border: 1px solid #C4CAD4;
+
+    cursor: pointer;
+    width: 50%;
+    height: 36px;
+    background-color: transparent;
+
+    font-family: "TT Interphases Pro Variable", Arial;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+/* Notifications */
 .notifications {
     position: fixed;
     bottom: 30%;
@@ -372,7 +435,7 @@ overflow-y: hidden;
 margin-top: 8px;
 }
 
-.notification__close-btn{
+.close-btn{
     width: 18px;
     height: 18px;
     background: url("@/assets/close_icon.png") no-repeat center;
