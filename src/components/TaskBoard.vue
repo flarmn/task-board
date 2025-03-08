@@ -19,11 +19,11 @@
             </div>
             <div v-else class="task-content">
                 {{ task.text }}
-                <button class="menu-button" @click="toggleMenu(task)">⋯</button>
+                <button class="menu-button" @click="toggleMenu(task)" :class="{ 'menu-button__active' : task.showMenu }">⋯</button>
             </div>
             <div v-if="task.showMenu" class="task-menu">
-                <button @click="editTask(task)">Редактировать</button>
-                <button @click="confirmDelete(column.id, task)">Удалить</button>
+                <button class = "task-menu__item task-menu__edit-btn" @click="editTask(task)">Редактировать</button>
+                <button class = "task-menu__item task-menu__delete-btn" @click="confirmDelete(column.id, task)">Удалить</button>
             </div>
             </div>
         </draggable>
@@ -99,6 +99,7 @@ methods: {
     task.isEditing = false;
     },
     confirmDelete(columnId, task) {
+    task.showMenu = false;
     this.showDeleteModal = true;
     this.taskToDelete = task;
     this.columnIdToDeleteFrom = columnId;
@@ -263,7 +264,13 @@ methods: {
     text-shadow: 1px 1px 4px #86949E;
 }
 
+.menu-button__active{
+    color: rgba(61, 134, 244, 1)
+}
+
 .task-menu {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 30px;
     right: 8px;
@@ -271,8 +278,44 @@ methods: {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 8px;
+    xxpadding: 8px;
     z-index: 10;
+    xxrow-gap: 8px;
+}
+
+.task-menu .task-menu__item{
+    display: flex;
+
+
+    align-items: center;
+    width: 144px;
+    height: 30px;
+   
+    
+    background-position: 8px center;
+    border-style: none;
+    padding-left: 32px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    
+   
+    margin-bottom: 8px;
+ 
+   
+}
+
+.task-menu .task-menu__item:hover{
+    background-color: rgba(225, 241, 255, 1);
+}
+
+.task-menu__edit-btn{
+    background: url("@/assets//edit.svg") no-repeat 20px;
+    
+}
+
+.task-menu__delete-btn{
+    background: url("@/assets//delete.svg") no-repeat 20px;
 }
 
 .task-column__task-add-btn{
@@ -313,6 +356,7 @@ methods: {
     background: #fff;
     padding: 40px;
     border-radius: 8px;
+    z-index: 100;
 }
 
 .modal__title{
