@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 <div class="modal-overlay">
 	<div class="modal">
 		<div class="modal__title">
@@ -12,19 +13,44 @@
 		</div>
 	</div>
 </div>
+=======
+	<div class="modal-overlay">
+		<div class="modal">
+			<div class="modal__title">
+				<h2 class="modal__title-text">Удалить задачу?</h2>
+				<CloseButton @click="closeAll"></CloseButton>
+			</div>
+			<p class="modal__task-text">{{ task.text }}</p>
+			<div class="modal-buttons">
+				<button @click="$emit('confirm')">Удалить</button>
+				<button @click="$emit('cancel')">Отменить</button>
+			</div>
+		</div>
+	</div>
+>>>>>>> 59911ab (Fix of final edit :))
 </template>
 
 <script>
 import CloseButton from '@/components/UI/CloseButton.vue';
+<<<<<<< HEAD
 export default { 
+=======
+export default {
+>>>>>>> 59911ab (Fix of final edit :))
 	props: { task: Object },
 	components: {
 		CloseButton
 	},
+<<<<<<< HEAD
 	methods:{
 		closeAll(){
 			console.log("closeALL clicked")
 			this.$emit('cancel'); 
+=======
+	methods: {
+		closeAll() {
+			this.$emit('cancel');
+>>>>>>> 59911ab (Fix of final edit :))
 			this.$emit('close-menu');
 		}
 	}
