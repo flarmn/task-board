@@ -1,4 +1,5 @@
 # task-board
+Tasks manager
 
 ## Project setup
 ```
